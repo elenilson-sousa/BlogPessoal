@@ -1,4 +1,4 @@
-package com.generationblogpessoal.model;
+package com.generation.blogpessoal.model;
 
 import java.util.List;
 
@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,35 +20,49 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@NotNull(message = "O atributo Nome é Obrigatório!")
+	private long id;
+	
+	@NotNull(message = "O atributo nome é obrigatório")
 	private String nome;
-
-	@NotNull(message = "O atributo Usuário é Obrigatório!")
-	@Email(message = "O atributo Usuário deve ser um email válido!")
+	
+	@NotNull(message = "O atributo usuário é obrigatório")
 	private String usuario;
-
-	@NotBlank(message = "O atributo Senha é Obrigatório!")
-	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
+	
+	@NotNull(message = "O atributo senha é obrigatório")
+	@Size(min = 8, message = "O atributo senha deve ter no mínimo 8 caracteres")
 	private String senha;
-
-	private String foto;
-
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	
+    private String foto;
+    
+	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagem;
+	private List <Postagem> postagem;
 
-	public Long getId() {
-		return id;
+	// Primeiro método Construtor
+
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
 	}
 
-	public void setId(Long id) {
+	// Segundo método Construtor
+
+	public Usuario() {	}
+
+
+	public long getId() {
+		return this.id;
+	}
+
+	public void setId(long id) {
 		this.id = id;
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -58,7 +70,7 @@ public class Usuario {
 	}
 
 	public String getUsuario() {
-		return usuario;
+		return this.usuario;
 	}
 
 	public void setUsuario(String usuario) {
@@ -66,23 +78,23 @@ public class Usuario {
 	}
 
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
-	public String getFoto() {
+    public String getFoto() {
 		return foto;
 	}
 
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-
+    
 	public List<Postagem> getPostagem() {
-		return postagem;
+		return this.postagem;
 	}
 
 	public void setPostagem(List<Postagem> postagem) {

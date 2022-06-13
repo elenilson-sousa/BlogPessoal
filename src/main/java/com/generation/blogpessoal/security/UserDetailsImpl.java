@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.generationblogpessoal.model.Usuario;
+import com.generation.blogpessoal.model.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;

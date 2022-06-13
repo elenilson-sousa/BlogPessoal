@@ -1,4 +1,4 @@
-package com.generationblogpessoal.controller;
+package com.generation.blogpessoal.controller;
 
 import java.util.List;
 
@@ -17,25 +17,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.generationblogpessoal.model.Postagem;
-import com.generationblogpessoal.repository.PostagemRepository;
+import com.generation.blogpessoal.model.Tema;
+import com.generation.blogpessoal.repository.TemaRepository;
 
 @RestController
-@RequestMapping("/postagem")
+@RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class PostagemController {
+public class TemaController {
 
 	@Autowired
-	private PostagemRepository PostagemRepository;
+	private TemaRepository TemaRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Postagem>> getAll(){
-		return ResponseEntity.ok(PostagemRepository.findAll());
+	public ResponseEntity<List<Tema>> getAll(){
+		return ResponseEntity.ok(TemaRepository.findAll());
+			
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Postagem> getById(@PathVariable Long id) {
-		return PostagemRepository.findById(id)
+	public ResponseEntity<Tema> getById(@PathVariable Long id) {
+		return TemaRepository.findById(id)
 			.map(resposta -> ResponseEntity.ok(resposta))
 			.orElse(ResponseEntity.notFound().build());
 	
@@ -43,34 +44,31 @@ public class PostagemController {
 		
 		//select * from tb_postagens where id = id;
 	}
-		@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<List<Postagem>> getByTitulo(@PathVariable String titulo){
-		return ResponseEntity.ok(PostagemRepository.findAllBytituloContainingIgnoreCase(titulo));
+		@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Tema>> getByTitulo(@PathVariable String descricao){
+		return ResponseEntity.ok(TemaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
 }
 		@PostMapping
-		public ResponseEntity<Postagem> postPostagem (@Valid @RequestBody Postagem postagem){
-			return ResponseEntity.status(HttpStatus.CREATED).body(PostagemRepository.save(postagem));
+		public ResponseEntity<Tema> postPostagem (@Valid @RequestBody Tema tema){
+			return ResponseEntity.status(HttpStatus.CREATED).body(TemaRepository.save(tema));
 		}
 
 		@PutMapping
-		public ResponseEntity<Postagem> putPostagem (@Valid @RequestBody Postagem postagem){
+		public ResponseEntity<Tema> putTema (@Valid @RequestBody Tema tema){
 			
-			return PostagemRepository.findById(postagem.getId())
-				.map(resposta -> ResponseEntity.ok().body(PostagemRepository.save(postagem)))
+			return TemaRepository.findById(tema.getId())
+				.map(resposta -> ResponseEntity.ok().body(TemaRepository.save(tema)))
 				.orElse(ResponseEntity.notFound().build());
 		}
 
 		@DeleteMapping("/{id}")
-		public ResponseEntity<?> deletePostagem(@PathVariable Long id) {
+		public ResponseEntity<?> deleteTema(@PathVariable Long id) {
 			
-			return PostagemRepository.findById(id)
+			return TemaRepository.findById(id)
 					.map(resposta -> {
-						PostagemRepository.deleteById(id);
+						TemaRepository.deleteById(id);
 						return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 					})
 					.orElse(ResponseEntity.notFound().build());
 		}
 }
-
-
-	

@@ -1,4 +1,4 @@
-package com.generationblogpessoal.service;
+package com.generation.blogpessoal.service;
 
 
 import java.nio.charset.Charset;
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.generationblogpessoal.model.Usuario;
-import com.generationblogpessoal.model.UsuarioLogin;
-import com.generationblogpessoal.repository.UsuarioRepository;
+import com.generation.blogpessoal.model.Usuario;
+import com.generation.blogpessoal.model.UsuarioLogin;
+import com.generation.blogpessoal.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
